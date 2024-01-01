@@ -15,6 +15,8 @@ class WARRIORBLADE_API AEnemy : public APawn, public IIDiable
 	GENERATED_BODY()
 
 public:	
+	AEnemy();
+
 	// Herdado por meio de IIDiable
 	void ApplyDamage(int Damage) override;
 	bool CanDie() override { return EnemyHP <= 0; }
@@ -22,7 +24,6 @@ public:
 
 private:
 	virtual void BeginPlay() override;
-	bool InitialConfiguration();
 	void SetDestination(const FVector& Position);
 
 	UFUNCTION()
@@ -31,6 +32,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Enemy")
 	int EnemyHP;
 
+	UPROPERTY(VisibleAnywhere, Category = "Enemy")
 	UBoxComponent* BoxComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Enemy")
 	AActor* Destination;
 };

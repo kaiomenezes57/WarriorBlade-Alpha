@@ -12,6 +12,14 @@
 
 #include "Components/BoxComponent.h"
 
+AEnemy::AEnemy()
+{
+	BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComponent"));
+	RootComponent = BoxComponent;
+
+	AIControllerClass = AAIController::StaticClass();
+}
+
 void AEnemy::ApplyDamage(int Damage)
 {
 	EnemyHP -= Damage;
@@ -24,21 +32,10 @@ void AEnemy::ApplyDamage(int Damage)
 }
 
 void AEnemy::BeginPlay()
-{
-	if (!InitialConfiguration()) { return; }
-	
+{	
 	Super::BeginPlay();
-	SetDestination(Destination->GetActorLocation());
-}
-
-bool AEnemy::InitialConfiguration()
-{
-	BoxComponent = Cast<UBoxComponent>(RootComponent);
-	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AEnemy::OnOverlapBegin);
 	Destination = UGameplayStatics::GetActorOfClass(GetWorld(), ATower::StaticClass());
-	AIControllerClass = AAIController::StaticClass();
-
-	return BoxComponent != nullptr && Destination != nullptr && AIControllerClass != nullptr;
+	SetDestination(Destination->GetActorLocation());
 }
 
 void AEnemy::SetDestination(const FVector& Position)
