@@ -2,12 +2,13 @@
 
 
 #include "EnemySpawner.h"
+#include "AIController.h"
 #include "AI/Enemy.h"
 
 AEnemySpawner::AEnemySpawner()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	SetActorHiddenInGame(true);
 	Time = 0;
 }
 
@@ -15,8 +16,8 @@ void AEnemySpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Time += DeltaTime;
-	
-	if (Time < 10) { return; }
+
+	if (Time < 20) { return; }
 	if (CanSpawn()) 
 	{
 		Spawn();
@@ -27,12 +28,8 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 void AEnemySpawner::Spawn()
 {
-    UWorld* World = GetWorld();
-
-    if (World)
-    {
-        FVector SpawnLocation = GetActorLocation();
-        FRotator SpawnRotation = GetActorRotation();
-        World->SpawnActor<AEnemy>(AEnemy::StaticClass(), SpawnLocation, SpawnRotation);
-    }
+	FVector SpawnLocation = GetActorLocation();
+	FRotator SpawnRotation = GetActorRotation();
+	
+	GetWorld()->SpawnActor<AEnemy>(AEnemy::StaticClass(), SpawnLocation, SpawnRotation);
 }

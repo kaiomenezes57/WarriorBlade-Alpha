@@ -4,6 +4,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "IDiable.h"
+#include "Components/TextRenderComponent.h"
 
 #include "Tower.generated.h"
  
@@ -22,8 +23,13 @@ public:
 	virtual void Die() override { OnDestroyTower.Broadcast(); Destroy(); }
 
 private:
+	virtual void BeginPlay() override;
+	void UpdateText();
+
 	OnDestroyTower OnDestroyTower;
 
 	UPROPERTY(VisibleAnywhere)
 	int TowerHP;
+	UPROPERTY(EditAnywhere)
+	UTextRenderComponent* TextRender;
 };

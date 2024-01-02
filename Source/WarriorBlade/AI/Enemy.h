@@ -16,25 +16,24 @@ class WARRIORBLADE_API AEnemy : public APawn, public IIDiable
 
 public:	
 	AEnemy();
+	virtual void BeginPlay() override;
 
 	// Herdado por meio de IIDiable
 	void ApplyDamage(int Damage) override;
 	bool CanDie() override { return EnemyHP <= 0; }
-	void Die() override { UE_LOG(LogTemp, Warning, TEXT("Morreu!")); }
+	void Die() override { Destroy(); }
 
 private:
-	virtual void BeginPlay() override;
-	void SetDestination(const FVector& Position);
-
 	UFUNCTION()
 	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void SetDestination();
 
-	UPROPERTY(EditAnywhere, Category = "Enemy")
+	UPROPERTY(VisibleAnywhere, Category = "Enemy")
 	int EnemyHP;
 
 	UPROPERTY(VisibleAnywhere, Category = "Enemy")
 	UBoxComponent* BoxComponent;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Enemy")
-	AActor* Destination;
+	UStaticMeshComponent* CubeMesh;
 };
