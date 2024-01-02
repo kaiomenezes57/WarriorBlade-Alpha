@@ -12,7 +12,7 @@ void ATower::ApplyDamage(int Damage)
 	TowerHP -= Damage;
 	UpdateText();
 
-	UE_LOG(LogTemp, Warning, TEXT("Torre tomou dano"));
+	UE_LOG(LogTemp, Warning, TEXT("Mexeu na torre"));
 	if (TowerHP < 0) { TowerHP = 0; }
 	if (CanDie()) { Die(); }
 }
@@ -28,7 +28,6 @@ void ATower::UpdateText()
 {
 	if (!TextRender) { return; }
 
-	UE_LOG(LogTemp, Warning, TEXT("Texto deu certo"));
 	FString String = FString::Printf(TEXT("%d/100"), TowerHP);
 	TextRender->SetText(FText::FromString(String));
 }

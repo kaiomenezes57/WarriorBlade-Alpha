@@ -31,5 +31,5 @@ void AEnemySpawner::Spawn()
 	FVector SpawnLocation = GetActorLocation();
 	FRotator SpawnRotation = GetActorRotation();
 	
-	GetWorld()->SpawnActor<AEnemy>(AEnemy::StaticClass(), SpawnLocation, SpawnRotation);
+	GetWorld()->SpawnActor<AEnemy>(EnemyBP, SpawnLocation, SpawnRotation);
 }

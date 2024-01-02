@@ -21,19 +21,19 @@ void UInteractionBrowser::BeginPlay()
 {
 	Super::BeginPlay();
 
-   /* if (APlayerController* PlayerController = GetWorld()->GetFirstPlayerController())
+    if (APlayerController* PlayerController = GetWorld()->GetFirstPlayerController())
     {
         if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerController->InputComponent))
         {
             EnhancedInputComponent->BindAction(AttackInputAction, ETriggerEvent::Started, this, &UInteractionBrowser::TryToApplyDamage);
         }
-    }*/
+    }
 }
 
 void UInteractionBrowser::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-    //Raycast();
+    Raycast();
 }
 
 void UInteractionBrowser::Raycast()

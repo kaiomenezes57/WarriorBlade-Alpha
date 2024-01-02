@@ -22,4 +22,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	float Time;
+
+public:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AEnemy> EnemyBP;
 };
